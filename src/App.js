@@ -3,6 +3,7 @@ import CreatePost from './components/publication/CreatePost';
 import PostList from './components/publication/PostList';
 import UserBar from './components/registration/UserBar';
 import React from 'react';
+import CalcReducer from './components/pages/CalcReducer';
 
 function App() {
   const defaultPosts = [
@@ -20,9 +21,9 @@ function App() {
       <UserBar user={user.username} password={user.password} setUser={setUser}/>
       {user.username && (<CreatePost user={user.username} posts={posts} setPosts={setPosts}/>)}
       {user.username && (<PostList posts={posts}/>)}
+      <CalcReducer/>
       </main>
     </div>
   );
 }
-
 export default App;
