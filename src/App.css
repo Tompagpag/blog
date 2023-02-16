@@ -13,7 +13,7 @@
   }
 }
 
-.App-header {
+.App-main {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -35,4 +35,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 5px 10px;
+  background-color: #282c34;
+  color: white;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 10px;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: white;
+  color: #282c34;
+}
+
+.post {
+  margin-bottom: 1rem;
+  border: 1px dashed white;
+  border-radius: 10px;
+}
+
+form {
+  margin-bottom: 1rem;
+}
+
+input, textarea {
+  margin-bottom: 1rem;
 }
