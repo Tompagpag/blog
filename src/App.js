@@ -1,40 +1,33 @@
 import './App.css';
-import CreatePost from './components/publication/CreatePost';
-import PostList from './components/publication/PostList';
-import UserBar from './components/registration/UserBar';
-import appReducer from './reducers';
-import React, { useEffect } from 'react';
-// import CalcReducer from './components/pages/CalcReducer';
+import Blog from './pages/Blog';
+import CalcReducer from './pages/CalcReducer';
+import NavBar from './components/NavBar';
 
+import {
+    Route,
+    Routes,
+    useParams,
+} from "react-router-dom";
+
+function User() {
+   const params = useParams();
+   console.log(params);
+    return (
+        <h1> user {params.id}</h1>
+    )
+}
 
 function App() {
-  const defaultPosts = [
-    { title: 'React Hooks', content: 'The greatest thing since sliced bread!', author: 'Daniel Bugl' },
-    { title: 'Using React Fragments', content: 'Keeping the DOM tree clean!', author: 'Daniel Bugl' }
-  ];
-
-  // const [posts, setPosts] = React.useState(defaultPosts);
-  // const [user, setUser] = React.useState({username: '', password: ''});
-
-    const [state, dispatch] = React.useReducer(appReducer, { user: '', posts: defaultPosts })
-    const { user, posts } = state;
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users/1')
-            .then(response => response.json())
-            .then((json) => {
-              console.log(json.name)
-            })
-    },[])
-
     return (
-        <div style={{ padding: 8 }}>
-            <UserBar user={user} dispatch={dispatch} />
-            <br />
-            {user && <CreatePost user={user} posts={posts} dispatch={dispatch} />}
-            <br />
-            <hr />
-            <PostList posts={posts} />
+        <div className="App-main" style={{ padding: 8 }}>
+            <NavBar />
+            <Routes>
+                <Route path='/' element={<h1>Home</h1>} />
+                <Route path='/blog' element={<Blog />} />
+                <Route path='/user/:id' element={<User />} />
+                <Route path='/incr' element={<CalcReducer />} />
+                <Route path='*' element={<h1>404</h1>} />
+            </Routes>
         </div>
     )
 }

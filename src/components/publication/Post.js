@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Post ({ title, content, author }) {
   return (
-    <div>
+    <div className='post'>
       <h3>{title}</h3>
       <div>{content}</div>
       <br />

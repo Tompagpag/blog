@@ -25,7 +25,7 @@ export default function Register ({ dispatch }) {
             <input type="password" value={password} onChange={handlePassword} name="register-password" id="register-password" />
             <label htmlFor="register-password-repeat">Repeat password:</label>
             <input type="password" value={passwordRepeat} onChange={handlePasswordRepeat} name="register-password-repeat" id="register-password-repeat" />
-            <input type="submit" value="Register" disabled={username.length === 0 || password.length === 0 || password !== passwordRepeat} />
+            <input type="submit" className="btn" value="Register" disabled={username.length === 0 || password.length === 0 || password !== passwordRepeat} />
         </form>
     )
 }

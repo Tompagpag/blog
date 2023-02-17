@@ -25,7 +25,7 @@ export default function CreatePost ({ user, posts, dispatch }) {
         <input type="text" value={title} onChange={handleTitle} name="create-title" id="create-title" />
       </div>
       <textarea value={content} onChange={handleContent} />
-      <input type="submit" value="Create" />
+      <input type="submit" value="Create" className="btn" />
     </form>
   )
 }
