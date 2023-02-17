@@ -1,11 +1,16 @@
-import Post from "./Post";
+import React from 'react'
 
-const PostList = ({ posts }) => {
-  return (
-    <div className="flex">
-      {posts.map((post, i) => <Post key={`post-${i}`}post={post}/>)}
-    </div>
-  )
+import Post from './Post'
+
+export default function PostList({ posts = [] }) {
+    return (
+        <div>
+            {posts.map((p, i) => (
+                <React.Fragment key={'post-' + i}>
+                    <Post {...p} />
+                    <hr />
+                </React.Fragment>
+            ))}
+        </div>
+    )
 }
-
-export default PostList;

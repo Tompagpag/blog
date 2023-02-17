@@ -1,11 +1,12 @@
-const Post = ({ post }) => {
+import React from 'react'
+
+export default function Post ({ title, content, author }) {
   return (
-    <div className="post">
-      <h3>{post.title}</h3>
-      <p>{post.content}</p>
-      <p><em>Written by <strong>{post.author}</strong></em></p>
+    <div>
+      <h3>{title}</h3>
+      <div>{content}</div>
+      <br />
+      <i>Written by <b>{author}</b></i>
     </div>
   )
 }
-
-export default Post;

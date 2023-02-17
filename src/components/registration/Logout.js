@@ -1,15 +1,11 @@
-const Logout = ({user, setUser}) => {
+const Logout = ({user, dispatch}) => {
+    return (
+        <form onSubmit={e => { e.preventDefault(dispatch({type:'LOGOUT'}));} }>
+            Logged in as: <b>{user}</b>
+            <input type="submit" value="Logout" />
+        </form>
+        )
 
-  const handleClick = (e) => {
-    setUser({username: '', password: ''});
-  }
-
-  return (
-    <>
-      <p>Logged in as : <strong>{user}</strong></p>
-      <button onClick={handleClick} className="btn">Se déconnecter</button>
-    </>
-  )
 }
 
 export default Logout;

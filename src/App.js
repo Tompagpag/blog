@@ -2,8 +2,10 @@ import './App.css';
 import CreatePost from './components/publication/CreatePost';
 import PostList from './components/publication/PostList';
 import UserBar from './components/registration/UserBar';
-import React from 'react';
-import CalcReducer from './components/pages/CalcReducer';
+import appReducer from './reducers';
+import React, { useEffect } from 'react';
+// import CalcReducer from './components/pages/CalcReducer';
+
 
 function App() {
   const defaultPosts = [
@@ -11,19 +13,29 @@ function App() {
     { title: 'Using React Fragments', content: 'Keeping the DOM tree clean!', author: 'Daniel Bugl' }
   ];
 
-  const [posts, setPosts] = React.useState(defaultPosts);
-  const [user, setUser] = React.useState({username: '', password: ''});
+  // const [posts, setPosts] = React.useState(defaultPosts);
+  // const [user, setUser] = React.useState({username: '', password: ''});
 
+    const [state, dispatch] = React.useReducer(appReducer, { user: '', posts: defaultPosts })
+    const { user, posts } = state;
 
-  return (
-    <div className="App">
-      <main className="App-main">
-      <UserBar user={user.username} password={user.password} setUser={setUser}/>
-      {user.username && (<CreatePost user={user.username} posts={posts} setPosts={setPosts}/>)}
-      {user.username && (<PostList posts={posts}/>)}
-      <CalcReducer/>
-      </main>
-    </div>
-  );
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users/1')
+            .then(response => response.json())
+            .then((json) => {
+              console.log(json.name)
+            })
+    },[])
+
+    return (
+        <div style={{ padding: 8 }}>
+            <UserBar user={user} dispatch={dispatch} />
+            <br />
+            {user && <CreatePost user={user} posts={posts} dispatch={dispatch} />}
+            <br />
+            <hr />
+            <PostList posts={posts} />
+        </div>
+    )
 }
 export default App;

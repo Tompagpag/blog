@@ -1,26 +1,31 @@
-const CreatePost = ({user, posts, setPosts}) => {
+import React, { useState } from 'react'
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const title = e.target.title.value
-    const content = e.target.content.value;
-    setPosts([ {title, content, author: user}, ...posts]);
+export default function CreatePost ({ user, posts, dispatch }) {
+  const [ title, setTitle ] = useState('')
+  const [ content, setContent ] = useState('')
+
+  function handleTitle (evt) {
+    setTitle(evt.target.value)
   }
 
+  function handleContent (evt) {
+    setContent(evt.target.value)
+  }
+
+  function handleCreate () {
+    dispatch({type:'CREATE_POST', title,content,author:user })
+  }
+
+
   return (
-    <form className="flex" onSubmit={handleSubmit}>
-      <p>Author : <strong>{user}</strong></p>
-      <label htmlFor="title">
-        Titre :
-      </label>
-        <input id="title" name="title" type="text"/>
-      <label htmlFor="content">
-        Contenu :
-      </label>
-        <textarea id="content" name="content" rows="4" cols="25"></textarea>
-      <input type="submit" className="btn" value="Ajouter >"/>
+    <form onSubmit={e => { e.preventDefault(); handleCreate() }}>
+      <div>Author: <b>{user}</b></div>
+      <div>
+        <label htmlFor="create-title">Title:</label>
+        <input type="text" value={title} onChange={handleTitle} name="create-title" id="create-title" />
+      </div>
+      <textarea value={content} onChange={handleContent} />
+      <input type="submit" value="Create" />
     </form>
   )
 }
-
-export default CreatePost;

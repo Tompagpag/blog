@@ -1,22 +1,19 @@
-const Login = ({ user, setUser }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const userLogin = e.target.utilisateur.value;
-    const userPassword = e.target.mdp.value;
-    setUser({...user, username: userLogin, password: userPassword})
+import React, { useState } from 'react'
+
+const Login = ({ user, dispatch }) => {
+  const [ username, setUsername ] = useState('')
+
+  function handleUsername (evt) {
+    setUsername(evt.target.value)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex">
-      <label htmlFor="utilisateur">
-        Utilisateur :
-      <input name="utilisateur" type="text"/>
-      </label>
-      <label htmlFor="mdp">
-        Mot de passe :
-      <input name="mdp" type="password"/>
-      </label>
-      <input type="submit" className="btn" value="Se connecter"/>
+    <form onSubmit={e => { e.preventDefault(); dispatch({ type: 'LOGIN', username }) }}>
+      <label htmlFor="login-username">Username:</label>
+      <input type="text" value={username} onChange={handleUsername} name="login-username" id="login-username" />
+      <label htmlFor="login-password">Password:</label>
+      <input type="password" name="login-password" id="login-password" />
+      <input type="submit" value="Login" disabled={username.length === 0} />
     </form>
   )
 }
